@@ -3,46 +3,60 @@ import { useState } from "react";
 const mockCandidates = [
   {
     id: 1,
-    name: "Aryan Sharma",
-    email: "aryan@partyA.com",
-    party: "Party A",
-    tagline: "Development for All",
+    name: "Jenny Wilson",
+    email: "jennywilson@example.com",
+    party: "Democratic Party",
+    constituency: "Central District",
     manifesto: "Our vision is a digital India with more employment and health reforms.",
-    photo: "https://via.placeholder.com/80",
+    photo: "https://randomuser.me/api/portraits/women/1.jpg",
+    isApproved: true
   },
   {
     id: 2,
-    name: "Meera Sinha",
-    email: "meera@partyB.com",
-    party: "Party B",
-    tagline: "Clean Governance",
+    name: "Ronald Richards",
+    email: "ronaldrichards@example.com",
+    party: "Green Party",
+    constituency: "North District",
     manifesto: "We aim for transparent systems and rural empowerment.",
-    photo: "https://via.placeholder.com/80",
+    photo: "https://randomuser.me/api/portraits/men/2.jpg",
+    isApproved: true
   },
+  {
+    id: 3,
+    name: "Eleanor Pena",
+    email: "eleanorpena@example.com",
+    party: "Independent",
+    constituency: "South District",
+    manifesto: "A voice for all citizens with focus on education and healthcare.",
+    photo: "https://randomuser.me/api/portraits/women/3.jpg",
+    isApproved: true
+  },
+  {
+    id: 4,
+    name: "John Doe",
+    email: "johndoe@example.com",
+    party: "Progressive Party",
+    constituency: "East District",
+    manifesto: "Building a sustainable future with economic growth and social justice.",
+    photo: "https://i.pravatar.cc/80",
+    isApproved: true
+  }
 ];
 
-const CandidateSection = () => {
-  const [votedCandidateId, setVotedCandidateId] = useState(null);
+const CandidatesList = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null);
-
-  const handleVote = (id) => {
-    if (!votedCandidateId) {
-      setVotedCandidateId(id);
-      alert(`You voted for candidate ID: ${id}`);
-    }
-  };
 
   const closeModal = () => setSelectedCandidate(null);
 
   return (
-    <div className="w-full p-1 mt-2">
+    <div className="w-full p-1">
       <div className="bg-gradient-to-br from-blue-50 to-indigo-100 border border-blue-300 rounded-xl shadow-lg p-6">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-blue-900 tracking-wide">
-            👥 Candidates
+            👥 All Candidates
           </h2>
           <div className="text-sm text-gray-600">
-            Select your preferred candidate
+            View other approved candidates
           </div>
         </div>
 
@@ -54,7 +68,7 @@ const CandidateSection = () => {
                 <div className="flex-1">
                   <h3 className="text-lg font-semibold text-blue-900 mb-1">{candidate.name}</h3>
                   <p className="text-sm text-blue-600 font-medium mb-1">{candidate.party}</p>
-                  <p className="text-sm italic text-gray-500">{candidate.tagline}</p>
+                  <p className="text-sm text-gray-500">{candidate.constituency}</p>
                 </div>
 
                 {/* Buttons */}
@@ -65,19 +79,9 @@ const CandidateSection = () => {
                   >
                     View Details
                   </button>
-                  <button
-                    onClick={() => handleVote(candidate.id)}
-                    disabled={!!votedCandidateId}
-                    className={`px-6 py-2 rounded-lg font-medium transition-all duration-200 ${
-                      votedCandidateId === candidate.id
-                        ? "bg-green-600 text-white cursor-not-allowed"
-                        : votedCandidateId
-                        ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                        : "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white"
-                    }`}
-                  >
-                    {votedCandidateId === candidate.id ? "✅ Voted" : "🗳 Vote"}
-                  </button>
+                  <div className="px-4 py-2 bg-green-100 text-green-700 rounded-lg font-medium">
+                    ✅ Approved
+                  </div>
                 </div>
               </div>
             </div>
@@ -101,7 +105,7 @@ const CandidateSection = () => {
               <p><span className="font-medium">Name:</span> {selectedCandidate.name}</p>
               <p><span className="font-medium">Email:</span> {selectedCandidate.email}</p>
               <p><span className="font-medium">Party:</span> {selectedCandidate.party}</p>
-              <p><span className="font-medium">Tagline:</span> {selectedCandidate.tagline}</p>
+              <p><span className="font-medium">Constituency:</span> {selectedCandidate.constituency}</p>
               <p className="mt-2 text-sm text-gray-700">
                 <span className="font-medium">Manifesto:</span><br /> 
                 {selectedCandidate.manifesto}
@@ -114,4 +118,4 @@ const CandidateSection = () => {
   );
 };
 
-export default CandidateSection;
+export default CandidatesList; 
